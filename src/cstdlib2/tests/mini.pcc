@@ -1,0 +1,17 @@
+FILE * fp ;
+fp = fopen( "test.ini", "wb" ) ;
+fprintf( fp, "[General]\n" ) ;
+fprintf( fp, ";comment\n" ) ;
+fprintf( fp, "name1=value1\n" ) ;
+fprintf( fp, "name2=value2\n" ) ;
+fclose(fp);
+system("cat test.ini");
+
+char pst[1024];
+if( readINI("test.ini","General","name2",pst)!= 0 ) { printf("Value=%s\n",pst) ; }
+if( readINI("test.ini","General","name3",pst)== 0 ) { printf("Value name3 non trouvee !!\n") ; }
+writeINI("test.ini","General","name1","new value");
+delINI("test.ini","General","name2");
+
+system("cat test.ini");
+unlink("test.ini");

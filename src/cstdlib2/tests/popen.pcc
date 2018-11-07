@@ -1,0 +1,13 @@
+//
+// Test des pipes (cstdlib2/popen.c)
+//
+FILE *fp;
+int status;
+char path[PATH_MAX];
+fp = popen("ls *", "r") ;
+if (fp == NULL) { printf("popen error!\n") ; } ;
+while( fgets(path, PATH_MAX, fp) != NULL) {
+    printf("%s", path);
+    }
+status = pclose(fp);
+printf("return code=%d\n", status);

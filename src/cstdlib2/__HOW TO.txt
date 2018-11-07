@@ -1,0 +1,69 @@
+Après avoir créé le .c
+Ajouter dans 
+- include.c dans la fonction IncludeInit ==> L'ordre est important
+	IncludeRegister("dirent.h", &DirentSetupFunc, &DirentFunctions[0], DirentDefs) ;
+- interpreter.h les definitions 
+	extern const char DirentDefs[];
+	
+extern struct LibraryFunction DirentFunctions[];
+	
+void DirentSetupFunc(void);
+- Makefile
+	cstdlib2/dirent.o: cstdlib2/dirent.c interpreter.h platform.h
+
+
+
+- modifier platform.h
+	Remplacer les 
+		#define INTERACTIVE_PROMPT_START "starting picoc " PICOC_VERSION "\n"
+		#define INTERACTIVE_PROMPT_STATEMENT "pico-c> "
+		#define INTERACTIVE_PROMPT_LINE "      > "
+	par 
+		#define INTERACTIVE_PROMPT_START "starting pico-c " PICOC_VERSION "\n"
+		extern char INTERACTIVE_PROMPT_STATEMENT[32] ;
+		extern char INTERACTIVE_PROMPT_LINE[32] ;
+
+- modifier picoc.c 
+	Remplacer LES 
+		int main(int argc, char **argv) 
+	par
+		int picoc_main(int argc, char **argv)
+
+	Ajouter 
+		int enhanced_mode = 1 ;
+		
+==> Voir aussi picoc.c pour les modifications d'option de lancement (-v)
+
+- modifier picoc.h pour la variable globale enhanced_mode (qui permet d'inclure tools.h)
+	Ajouter 
+		extern int enhanced_mode ;
+
+- Modifier la struct tm directement dans le fichier cstdlib/time.c
+
+- Modifier platform.c 
+	Ajouter
+		char INTERACTIVE_PROMPT_STATEMENT[32] = "pico-c> " ;
+		char INTERACTIVE_PROMPT_LINE[32] = "      > " ;
+	Ajouter la fonction
+	void PrintHelp( char * filename, struct LibraryFunction DefFunctions[], const char * Defs ) {
+	int i=0 ;
+	if( filename != NULL ) { printf( "/* %s prototypes */\n", filename ) ; }
+	if( Defs != NULL ) { printf( "%s\n", Defs ) ; }
+	if( DefFunctions != NULL )
+		while( DefFunctions[i].Prototype != NULL ) {
+			printf( "%s\n", DefFunctions[i].Prototype ) ;
+			i++;
+		}
+	printf( "\n" ) ;
+}
+
+	
+- modifier cstdlib/unistd.c
+	Ajouter la gestion de la variable environ (4 lignes):
+		extern char ** environ ;
+		static char ** environValue ;
+	     et
+		environValue = environ ;
+		VariableDefinePlatformVar(pc, NULL, "environ", pc->CharPtrPtrType, (union AnyValue *)&environValue, FALSE);
+	
+	

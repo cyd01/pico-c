@@ -1,0 +1,44 @@
+int listenfd = 0, connfd = 0, n=0;
+    struct sockaddr_in serv_addr; 
+
+    char sendBuff[1025];
+    char recvBuff[1025];
+    time_t ticks; 
+
+    printf("Socket creation (socket)\n");
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    memset(&serv_addr, '0', sizeof(serv_addr));
+    memset(sendBuff, '0', sizeof(sendBuff)); 
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serv_addr.sin_port = htons(1987); 
+
+    printf("Check port (Bind)\n");
+    bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)); 
+
+    printf("Start server (listen)\n");
+    listen(listenfd, 10); 
+
+    while(1)
+    {
+        printf("Accept connection (accept)\n");
+        connfd = accept(listenfd, (struct sockaddr*)NULL, NULL); 
+	printf("Connection accepted\n");
+
+	/*n = read(connfd, recvBuff, sizeof(recvBuff)-1) ;
+	recvBuff[n]='\0';*/
+	recv( connfd, recvBuff, sizeof(recvBuff)-1, 0 );
+	printf("Message received: %s\n",recvBuff);
+
+        ticks = time(NULL);
+        snprintf(sendBuff, sizeof(sendBuff), "%.24s\r\n", ctime(&ticks));
+	
+        /*write(connfd, sendBuff, strlen(sendBuff)); */
+	send( connfd, sendBuff, strlen(sendBuff), 0);
+	printf("Message sent: %s\n",sendBuff);
+	
+	shutdown(connfd,2);
+        close(connfd);
+        sleep(1);
+     }

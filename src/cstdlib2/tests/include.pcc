@@ -1,0 +1,8 @@
+/* Affiche le repertoire courant */
+char c[256] ;
+getcwd(c, 256); 
+printf("%s\n",c);
+
+INCLUDE( "f1.pcc" );
+printmessage( "Hello world !!\n" );
+f2();

@@ -1,0 +1,7 @@
+//
+// Test de cstdlib2/dirent.c
+//
+void printdir( char * directory ) { DIR * dir ; struct dirent * de ; if( (dir=opendir( directory )) != NULL ) { while( (de=readdir(dir)) != NULL ) { char * name = dirent_getname( de ) ; if( strcmp(name,".")&&strcmp(name,"..") ) { printf("%s\n",name); } } closedir(dir); 
+	} 
+}
+printdir(".");

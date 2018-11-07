@@ -1,0 +1,5 @@
+struct { char * st ; } st_s;
+char st[256];
+strcpy( st, "Ceci est un test\n" );
+st_s.st=st;
+rundll("cstdlib2/testdll.dll","myputs_h",&st_s);

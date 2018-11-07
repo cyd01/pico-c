@@ -1,0 +1,11 @@
+/* pcc -m main.pcc - 1 2 3 ; echo $? */
+int main( int argc, char ** argv ) {
+	int ret = 0, i ;
+	
+	printf("argc=%d\n",argc);
+	for( i=0 ; i<argc ; i++ ) {
+		printf("argv[%d]=%s\n",i,argv[i]);
+	}
+	ret = 123 ;
+	return ret ;
+}

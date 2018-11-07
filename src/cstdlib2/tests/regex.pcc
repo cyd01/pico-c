@@ -1,0 +1,45 @@
+
+//
+// Test des expressions regulieres (cstdlib2/regex.c)
+//
+
+/*
+printf("REG_NOMATCH=%d\n",REG_NOMATCH );
+int status ;
+regex_t re ;
+if (regcomp(&re, "[A-Z]*", REG_EXTENDED|REG_NOSUB) != 0) { printf("regcomp KO !!\n") ; }
+status = regexec(&re, "AZERTY", 0, NULL, 0);
+if( status != 0) { printf("Pas de match !!\n") ; } else { printf("MATCH !\n") ; }
+status = regexec(&re, "123456", 0, NULL, 0);
+if( status != 0) { printf("Pas de match !!\n") ; } else { printf("MATCH !\n") ; }
+regfree(&re);
+*/
+
+
+int testregex( char * pattern, char * str ) {
+	regex_t regex;
+	int reti;
+	char msgbuf[100];
+
+	/* Compile regular expression */
+	reti = regcomp(&regex, pattern, 0);
+	if( reti!=0 ){ fprintf(stderr, "Could not compile regex\n"); exit(1); } ;
+
+	/* Execute regular expression */
+	reti = regexec(&regex, str, 0, NULL, 0);
+	if( !reti ){ 
+		puts("Match"); } else if( reti == REG_NOMATCH ) { 
+		puts("No match");
+        } else{
+                regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+                fprintf(stderr, "Regex match failed: %s\n", msgbuf);
+                exit(1);
+	} ;
+
+	/* Free compiled regular expression if you want to use the regex_t again */
+	regfree(&regex);
+	return !reti ;
+} ;
+
+printf( "^a[[:alnum:]]*$ / abcdef	%d\n", testregex( "^a[[:alnum:]]*$", "abcdef") );
+printf( "^a[[:alnum:]]*$ / 123456	%d\n", testregex( "^a[[:alnum:]]*$", "123456") );

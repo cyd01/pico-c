@@ -1,0 +1,7 @@
+{
+    "useSideMenu": true,
+    "lineBreaks": "gfm",
+    "additionalFooterText": "Original address of this page is <a href='http://www.9bis.net/c'>http://www.9bis.net/c</a><br/>",
+    "anchorCharacter": "#",
+    "title": "pico-c, a very small C interpreter"
+}

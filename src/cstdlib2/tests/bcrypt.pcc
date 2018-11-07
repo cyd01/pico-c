@@ -1,0 +1,11 @@
+char b[256], c[256], d[256] ;
+int nb;
+
+strcpy(b,"Ceci est un test !") ;
+
+bcrypt_init(time(0));
+nb = bcrypt_string_printable( b, c, strlen(b), "123456", 80 ) ;
+printf( "nb=%d, str=%s\n", nb, c);
+
+buncrypt_string_printable( c, d, nb, "123456" ) ;
+printf( "str=%s\n",d );

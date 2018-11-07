@@ -1,0 +1,6 @@
+void printmessage( char * msg ) { 
+	printf( "%s\n", msg ) ; 
+}
+void f2() { 
+	printf( "in f2\n" ) ; 
+}
