@@ -104,5 +104,5 @@ while(1) {
 ###  How tu use it:
 
 1. Create a file named ```socket.pcc``` with the source code above.
-1. Run the command ```pico-c -m socket.pcc```
+1. Run the command ```pico-c socket.pcc```
 1. Start your favorite browser on [http://localhost:1987](http://localhost:1987/) tu see the result.
