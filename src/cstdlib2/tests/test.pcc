@@ -16,23 +16,6 @@ getcwd(c, 256); printf("%s\n",c);
 
 
 //
-// Test d'affiche de l'environnement
-//
-//extern char **environ;
-
-printf("%s\n",environ[0]);
-
-printf("Login:%s\n",getlogin());
-printf("PATH:%s\n",getenv("PATH"));
-
-int i;
-i=0;
-while( environ[i] != NULL ) {
- 	printf("%s\n",environ[i]);
- 	i++; 
-}
-
-//
 // Test de la structure tm
 //
 time_t t;
