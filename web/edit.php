@@ -10,7 +10,7 @@ if( !isset( $_SERVER['HTTP_AUTHORIZATION'] ) || ($_SERVER['HTTP_AUTHORIZATION']=
 	echo "You are not authorized to access this page." ;
 	exit(0);
 }
-if( $_SERVER['HTTP_AUTHORIZATION']!=("Basic ".base64_encode("cyrtex:altar910")) ) {
+if( $_SERVER['HTTP_AUTHORIZATION']!=("Basic ".base64_encode( preg_replace("/[\\r\\n]*$/","",file_get_contents("pass/password.inc")) )) ) {
 	http_response_code(403) ;
 	header( "HTTP/1.1 403 Forbidden" ) ;
 	echo "Forbidden." ,
