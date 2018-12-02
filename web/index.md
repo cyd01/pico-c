@@ -4,10 +4,11 @@
 
 # Origins
 
-**pico-c** is a project created by Zik at [https://code.google.com/p/picoc](https://code.google.com/p/picoc/ "Google code").
-The projet is now hosted at [https://gitlab.com/zsaleeba/picoc](https://gitlab.com/zsaleeba/picoc/ "Github.com"). 
+Original **pico-c** is a project created by Zik at [https://code.google.com/p/picoc](https://code.google.com/p/picoc/ "Google code") and it is currently hosted at [https://gitlab.com/zsaleeba/picoc](https://gitlab.com/zsaleeba/picoc/ "Github.com"). 
 
-**pico-c** intends to be a very light **C** interpreter. **pico-c** is very small, but include many standard libraries.
+This **pico-c** version intends to be a very light **C** interpreter. It is maintened by Cyd at [github.com](https://github.com/cyd01/pico-c).
+  
+**pico-c** is very small, but include many standard libraries.
 
 # The content
 
@@ -35,7 +36,7 @@ We have planned to add support for 3 other useful libraries:
 * [socket.h](pages/socket.h.md "socket.h")
 * [stat.h](pages/stat.h.md "stat.h")
 
-**pico-c** builds are available for Win32, CentOS (RedHat), and Ubuntu. To get them just jump to the [download page](download.md "Download page").
+**pico-c** builds are available for Win32, CentOS (RedHat), and Ubuntu. To get them just jump to the [download page](pages/download.md "Download page").
 
 # The pico-c syntax
 
