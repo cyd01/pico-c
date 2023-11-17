@@ -44,7 +44,7 @@ Usage: pico-c.exe [-h] [-i] [-m] [-n] [-o] [<filename1>...] [- <arg1>...]
 Exemples:
         pico-c.exe script1.pcc script2.pcc
         pico-c.exe -i script.pcc
-        pico-c.exe -m script1.pcc script2.pcc - arg1 agr2}
+        pico-c.exe -m script1.pcc script2.pcc - arg1 agr2
 ```
 
 
